@@ -1,0 +1,8 @@
+5
+- a - b + e ;
+- b - c + e ;
+- a - c + d + e ;
+- a + c - d + e ;
++ a - b + d + e ;
+- a - b - c + d ;
+;

@@ -1,0 +1,74 @@
+Julian Kemmerer
+ECEC 671
+Unate Recursive Tautology Code
+
+Compile and run with: $ g++ tau.cpp -o tau && ./tau sample
+Where 'sample' is the name of the file you wish to read in.
+
+Sample input (from project handout):
+4
++ a ;
+- c - d ;
+- a - b ;
++ a + b + c ;
++ a - b + d ;
+;
+
+Sample output:
+Initial expression: a + c'd' + a'b' + abc + ab'd
+Splitting a + c'd' + a'b' + abc + ab'd into cofactors with respect to: c
+fc: a + a'b' + ab + ab'd
+fc': a + d' + a'b' + ab'd
+Splitting a + a'b' + ab + ab'd into cofactors with respect to: b
+fb: a + a
+fb': a + a' + ad
+Expression: a + a is unate
+...and falls under the missing all DC cube rule: not tautology
+a + c'd' + a'b' + abc + ab'd is not a tautology.
+
+There is certainly a better way to organize the data storage and
+performance here...
+I pass around whole (vector) lists rather than pointers and iterate 
+through the same list multiple unneeded times...
+However, this is not being measured on performace, and rather than being
+clever the code is quite understandable and well documented.
+
+Random Examples:
+Not Tautology: A'B'E + B'C'E + A'C'DE + A'CD'E + ABCE + AB'DE + A'B'C'D
+K-MAP:
+	CDE							
+AB	000	001	011	010	110	111	101	100
+00		1	1	1		1	1	
+01			1				1	
+11								
+10		1	1			1		
+Program Output:
+Initial expression: a'b'e + b'c'e + a'c'de + a'cd'e + ab'de + a'b'c'd
+Splitting a'b'e + b'c'e + a'c'de + a'cd'e + ab'de + a'b'c'd into cofactors with respect to: c
+fc: a'b'e + a'd'e + ab'de
+fc': a'b'e + b'e + a'de + ab'de + a'b'd
+Splitting a'b'e + a'd'e + ab'de into cofactors with respect to: d
+fd: a'b'e + ab'e
+fd': a'b'e + a'e
+Splitting a'b'e + ab'e into cofactors with respect to: a
+fa: b'e
+fa': b'e
+Expression: b'e is unate
+...and falls under the missing all DC cube rule: not tautology
+a'b'e + b'c'e + a'c'de + a'cd'e + ab'de + a'b'c'd is not a tautology.
+
+Is Tautology: A + A' + BCDE
+K-MAP:
+	CDE							
+AB	000	001	011	010	110	111	101	100
+00	1	1	1	1	1	1	1	1
+01	1	1	1	1	1	1	1	1
+11	1	1	1	1	1	1	1	1
+10	1	1	1	1	1	1	1	1
+Program Output:
+Initial expression: a + a' + bcde
+Expression: a + a' + bcde has a single variable SOP terms that appear in both polarities: is tautology.
+a + a' + bcde is a tautology.
+
+
+
